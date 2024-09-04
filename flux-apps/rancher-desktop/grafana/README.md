@@ -1,3 +1,6 @@
-kubectl port-forward -n grafana grafana-5b7bb469c8-2n9vr 3000:3000 http://localhost:3000
+kubectl port-forward -n grafana grafana-f69df4b65-xlwm2 3000:3000 
 
-username:admin password:admin
+http://localhost:3000
+
+username:admin 
+password:admin
