@@ -1,19 +1,4 @@
-apiVersion: networking.k8s.io/v1
-kind: Ingress
+apiVersion: v1
+kind: Namespace
 metadata:
-  name: grafana-ingress
-  namespace: grafana
-  annotations:
-    nginx.ingress.kubernetes.io/rewrite-target: /
-spec:
-  rules:
-    - host: grafana-nessy.com  # Replace with your domain
-      http:
-        paths:
-          - path: /
-            pathType: Prefix
-            backend:
-              service:
-                name: grafana
-                port:
-                  number: 3000
+  name: grafana
