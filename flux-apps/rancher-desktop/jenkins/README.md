@@ -1,0 +1,1 @@
+kubectl port-forward -n jenkins svc/jenkins 8081:8080 http://localhost:8081/
