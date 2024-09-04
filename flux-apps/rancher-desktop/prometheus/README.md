@@ -1,0 +1,1 @@
+kubectl port-forward -n prometheus prometheus-6c45794ff6-dlt2q 9090:9090 http://localhost:9090
