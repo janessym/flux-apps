@@ -1,0 +1,76 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+#kubernetes resources to be managed by kustomize
+resources:
+  - deployment.yaml
+
+#Customizations that need to be made using common transformations
+namespace: deployment
+namePrefix: Kodekloud-
+nameSuffix: -dev
+commonAnnotations:
+    example: annotation
+
+#Replacing using patches deployment name using json 6902 patch
+patches:
+ - target:
+     kind: Deployment
+     name: nginx-deployment
+
+   patch: |-
+     - op: replace
+       path: /metadata/name
+       value: web-deployment
+     
+#Replacing the replicas using json 6902 patch
+patches:
+ - target:
+     kind: Deployment
+     name: nginx-deployment
+   patch: |-
+     - op: replace
+       path: /spec/replicas
+       value: 5     
+
+#adding new label to my deployment ussing json 6902
+patches:
+ - target:
+     kind: Deployment
+     name: nginx-deployment
+   patch: |-
+     - op: add
+       path: /spec/template/metadata/labels/app
+       value: nginx1
+
+#Remove labels from my deployment using json 6902
+patches:
+ - target:
+     kind: Deployment
+     name: nginx-deployment
+   patch: |-
+     - op: remove
+       path: /spec/template/metadata/labels/app1
+
+#Replacing containers using json 6902
+patches:
+ - target:
+     kind: Deployment
+     name: nginx-deployment
+   patch: |-
+     - op: replace
+       path: /spec/template/spec/containers/0
+       value:
+         name: haproxy
+         image: haproxy
+
+#Adding another container
+patches:
+ - target:
+     kind: Deployment
+     name: nginx-deployment
+   patch: |-
+     - op: add
+       path: /spec/template/spec/containers/-
+       value:
+         name: haproxy
+         image: haproxy
