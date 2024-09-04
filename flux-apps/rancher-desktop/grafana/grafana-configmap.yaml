@@ -1,0 +1,12 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: grafana-config
+  namespace: grafana
+data:
+  grafana.ini: |
+    [server]
+    # Protocol (http or https)
+    protocol = http
+    # The http port  to use
+    http_port = 3000
