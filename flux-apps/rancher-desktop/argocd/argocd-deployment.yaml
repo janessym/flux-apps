@@ -1,0 +1,30 @@
+# argocd-deployment.yaml
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: argocd-server
+  namespace: argocd
+  labels:
+    app: argocd-server
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: argocd-server
+  template:
+    metadata:
+      labels:
+        app: argocd-server
+    spec:
+      containers:
+      - name: argocd-server
+        image: argoproj/argocd:v2.6.0  # Use the desired version
+        ports:
+        - containerPort: 9092          # Change to the desired port
+        volumeMounts:
+        - name: argocd-secret
+          mountPath: /app/config/secret
+      volumes:
+      - name: argocd-secret
+        secret:
+          secretName: argocd-secret

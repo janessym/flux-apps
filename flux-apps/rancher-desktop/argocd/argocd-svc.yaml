@@ -1,0 +1,13 @@
+# argocd-service.yaml
+apiVersion: v1
+kind: Service
+metadata:
+  name: argocd-server
+  namespace: argocd
+spec:
+  type: LoadBalancer  # Or NodePort if not using LoadBalancer
+  ports:
+    - port: 9092        # Change to the desired port
+      targetPort: 9092  # Match the container port
+  selector:
+    app: argocd-server
