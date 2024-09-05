@@ -74,4 +74,13 @@ patches:
        value:
          name: haproxy
          image: haproxy
-         
+
+#Create configmap
+# configMapGenerator:
+#   - literals:
+#       - password=password3
+#     name: db-cred
+#     options:
+#       labels:   
+#         app-config: my-config 
+
